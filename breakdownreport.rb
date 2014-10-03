@@ -22,6 +22,7 @@ end
 # WORK IN PROGRESS - DONE
 print "Pueblo: "
 pueblito = STDIN.gets.chomp()
+pueblito.upcase
 
 breakdownstuff = aee_client.call(:get_breakdowns_by_town_or_city, message: { "townOrCity" => pueblito })
 

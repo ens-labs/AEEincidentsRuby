@@ -2,6 +2,7 @@ AEEincidentsRuby
 ================
 
 AEE Incidents made in Ruby with Savon. Minified version, only works in terminal. The Web App is in progress.
+The basic script is: breakdownreport.rb, testing_reports.rb is just for testing things.
 
 Requirements
 ============

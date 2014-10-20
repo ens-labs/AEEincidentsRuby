@@ -17,8 +17,9 @@ bundle install
 How to run it
 ===========
 
-1. ruby breakdownreport.rb
-2. Type the Town you wish to see information about
+1. ruby breakdownreport.rb to get a list and how many averias are and type the averia you wish to get info.
+OR 
+2. ruby breakdownreportall.rb to get all the averias at once.
 3. Done!
 
 

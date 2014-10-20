@@ -18,7 +18,7 @@ How to run it
 ===========
 
 1. ruby breakdownreport.rb
-2. Select the Town you wish to see information
+2. Type the Town you wish to see information about
 3. Done!
 
 

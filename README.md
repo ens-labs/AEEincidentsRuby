@@ -22,4 +22,10 @@ OR
 2. ruby breakdownreportall.rb to get all the averias at once.
 3. Done!
 
+In Progress:
+=============
+
+At the moment working with the script to post the averias to Twitter.
+Also working on the WebApp.
+
 

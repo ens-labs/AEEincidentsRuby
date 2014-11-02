@@ -38,10 +38,10 @@ hashtable.each do |key, value|
 			if value[:return].kind_of?(Array)
 				for averias in 1..cantidad_averias_pueblo
 					averias -= 1
-					client.update("OOPS! ataeeonline tienes una averia en: " + value[:return][averias][:r1_town_or_city] + " " + value[:return][averias][:r2_area])
+					client.update("OOPS! @AEEONLINE tienes una averia en: " + value[:return][averias][:r1_town_or_city] + " " + value[:return][averias][:r2_area])
 				end
 			else
-				client.update("OOPS! ataeeonline tienes una averia en: " + value[:return][:r1_town_or_city] + ", " + value[:return][:r2_area])
+				client.update("OOPS! @AEEONLINE tienes una averia en: " + value[:return][:r1_town_or_city] + ", " + value[:return][:r2_area])
 			end
 		end
 	end

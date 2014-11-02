@@ -6,13 +6,7 @@ The basic script is: breakdownreport.rb, testing_reports.rb is just for testing 
 
 Requirements
 ============
-
-1. Ruby 1.9.3
-2. Savon
-
-Or
-
-bundle install
+ruby 1.9.3 and just bundle install
 
 How to run the basics scripts
 ===========

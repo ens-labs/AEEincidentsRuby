@@ -17,9 +17,9 @@ hashtable.each do |key, value|
 		cada_pueblo -= 1
 		pueblos.push value[:return][cada_pueblo][:r1_town_or_city]
 	end
-	for Pueblo in 1..pueblos.length
-		Pueblo -= 1
-		breakdownstuff = aee_client.call(:get_breakdowns_by_town_or_city, message: { "townOrCity" => pueblos[Pueblo] })
+	for pueblo in 1..pueblos.length
+		pueblo -= 1
+		breakdownstuff = aee_client.call(:get_breakdowns_by_town_or_city, message: { "townOrCity" => pueblos[pueblo] })
 		hash_table = breakdownstuff.body
 		hash_table.each do |key, value|
 			cantidad_averias_pueblo = value[:return].length

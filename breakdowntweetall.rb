@@ -13,14 +13,11 @@ client = Twitter::REST::Client.new do |config|
 end
 
 aee_url = 'http://wss.prepa.com/services/BreakdownReport?wsdl'
+pueblos = Array.new
 
 aee_client = Savon.client(wsdl: aee_url)
-
 breakdownSummary = aee_client.call(:get_breakdowns_summary)
-
 hashtable = breakdownSummary.body
-
-pueblos = Array.new
 
 hashtable.each do |key, value|
 	cantidad_de_pueblos = value[:return].length
@@ -28,21 +25,18 @@ hashtable.each do |key, value|
 		cada_pueblo -= 1
 		pueblos.push value[:return][cada_pueblo][:r1_town_or_city]
 	end
-	for Pueblo in 1..pueblos.length
-		Pueblo -= 1
-		breakdownstuff = aee_client.call(:get_breakdowns_by_town_or_city, message: { "townOrCity" => pueblos[Pueblo] })
-		hash_table = breakdownstuff.body
-		hash_table.each do |key, value|
-			cantidad_averias_pueblo = value[:return].length
-			# Checks if its an array of hashes or a hash
-			if value[:return].kind_of?(Array)
-				for averias in 1..cantidad_averias_pueblo
-					averias -= 1
-					client.update("OOPS! @AEEONLINE tienes una averia en: " + value[:return][averias][:r1_town_or_city] + " " + value[:return][averias][:r2_area])
-				end
-			else
-				client.update("OOPS! @AEEONLINE tienes una averia en: " + value[:return][:r1_town_or_city] + ", " + value[:return][:r2_area])
-			end
+end
+
+pueblos.each do |value|
+	breakdownstuff = aee_client.call(:get_breakdowns_by_town_or_city, message: { "townOrCity" => value })
+	data = breakdownstuff.body
+	if data[:get_breakdowns_by_town_or_city_response][:return].kind_of?(Array)
+		cantidad_averias_pueblo = data[:get_breakdowns_by_town_or_city_response][:return].length
+		for averias in 1..cantidad_averias_pueblo
+			averias -= 1
+			client.update("OOPS! @AEEONLINE tienes una averia en: " + data[:get_breakdowns_by_town_or_city_response][:return][averias][:r1_town_or_city] + " " + data[:get_breakdowns_by_town_or_city_response][:return][averias][:r2_area])
 		end
+	else
+		client.update("OOPS! @AEEONLINE tienes una averia en: " + data[:get_breakdowns_by_town_or_city_response][:return][:r1_town_or_city] + " " + data[:get_breakdowns_by_town_or_city_response][:return][:r2_area])
 	end
 end

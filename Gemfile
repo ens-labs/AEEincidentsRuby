@@ -4,3 +4,4 @@ source "https://rubygems.org"
 gem 'savon', '~> 2.0'
 gem 'oauth'
 gem 'twitter'
+gem 'colorize'

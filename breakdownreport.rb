@@ -11,7 +11,7 @@ hashtable = breakdownSummary.body
 
 hashtable.each do |key, value|
 	cantidad_de_pueblos = value[:return].length
-	puts value
+	#puts value
 	puts "Pueblos disponibles: "
 	for cada_pueblo in 1..cantidad_de_pueblos
 		cada_pueblo -= 1

@@ -2,16 +2,13 @@
 require 'savon'
 
 aee_url = 'http://wss.prepa.com/services/BreakdownReport?wsdl'
-
 aee_client = Savon.client(wsdl: aee_url)
-
 breakdownSummary = aee_client.call(:get_breakdowns_summary)
 
 hashtable = breakdownSummary.body
 
 hashtable.each do |key, value|
 	cantidad_de_pueblos = value[:return].length
-	#puts value
 	puts "Pueblos disponibles: "
 	for cada_pueblo in 1..cantidad_de_pueblos
 		cada_pueblo -= 1
@@ -19,8 +16,6 @@ hashtable.each do |key, value|
 	end
 end
 
-
-# WORK IN PROGRESS - DONE
 print "Pueblo: "
 pueblito = STDIN.gets.chomp()
 pueblito.upcase

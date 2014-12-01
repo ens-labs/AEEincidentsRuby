@@ -27,8 +27,8 @@ hashtable.each do |key, value|
 	end
 end
 
-pueblos.each do |value|
-	breakdownstuff = aee_client.call(:get_breakdowns_by_town_or_city, message: { "townOrCity" => value })
+pueblos.each do |pueblo|
+	breakdownstuff = aee_client.call(:get_breakdowns_by_town_or_city, message: { "townOrCity" => pueblo })
 	data = breakdownstuff.body
 	if data[:get_breakdowns_by_town_or_city_response][:return].kind_of?(Array)
 		cantidad_averias_pueblo = data[:get_breakdowns_by_town_or_city_response][:return].length

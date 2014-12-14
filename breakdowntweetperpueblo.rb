@@ -33,19 +33,17 @@ end
 # WORK IN PROGRESS - DONE
 print "Pueblo: "
 pueblito = STDIN.gets.chomp()
-pueblito.upcase
 
-breakdownstuff = aee_client.call(:get_breakdowns_by_town_or_city, message: { "townOrCity" => pueblito })
+breakdownstuff = aee_client.call(:get_breakdowns_by_town_or_city, message: { "townOrCity" => pueblito.upcase })
 
 hash_table = breakdownstuff.body
 hash_table.each do |key, value|
 	cantidad_averias_pueblo = value[:return].length
-	# Checks if its an array of hashes or a hash
+	# Checks if its an array of hashes or a single hash
 	if value[:return].kind_of?(Array)
 		for averias in 1..cantidad_averias_pueblo
 			averias -= 1
 			  client.update("OOPS! @AEEONLINE tienes una averia en: " + value[:return][averias][:r1_town_or_city] + " " + value[:return][averias][:r2_area])
-		
 		end
 	else
 		client.update("OOPS! @AEEONLINE tienes una averia en: " + value[:return][:r1_town_or_city] + ", " + value[:return][:r2_area])

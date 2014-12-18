@@ -6,7 +6,8 @@ The basic script is: **breakdownreport.rb** and **testing_reports.rb** is just f
 
 Requirements
 ============
-ruby 1.9.3 and just **bundle install**
+* ruby 1.9.3 
+* **bundle install**
 
 How to run the basics scripts
 ===========

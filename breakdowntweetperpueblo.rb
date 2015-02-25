@@ -21,9 +21,8 @@ breakdownSummary = aee_client.call(:get_breakdowns_summary)
 hashtable = breakdownSummary.body
 
 hashtable.each do |key, value|
-	cantidad_de_pueblos = value[:return].length
 	puts "Pueblos disponibles: "
-	for cada_pueblo in 0...cantidad_de_pueblos
+	for cada_pueblo in 0...value[:return].length
 		puts value[:return][cada_pueblo][:r1_town_or_city] + " " + value[:return][cada_pueblo][:r2_total_breakdowns]
 	end
 end
@@ -37,10 +36,9 @@ breakdownstuff = aee_client.call(:get_breakdowns_by_town_or_city, message: { "to
 
 hash_table = breakdownstuff.body
 hash_table.each do |key, value|
-	cantidad_averias_pueblo = value[:return].length
 	# Checks if its an array of hashes or a single hash
 	if value[:return].kind_of?(Array)
-		for averias in 0...cantidad_averias_pueblo
+		for averias in 0...value[:return].length
 			  client.update("OOPS! @AEEONLINE tienes una averia en: " + value[:return][averias][:r1_town_or_city] + " " + value[:return][averias][:r2_area])
 		end
 	else

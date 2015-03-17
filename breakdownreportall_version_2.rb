@@ -17,7 +17,7 @@ for town in towns
 			puts "Status: " + breakdowns[:get_breakdowns_by_town_or_city_response][:return][breakdown][:r3_status]
 			puts "Last Update: " + breakdowns[:get_breakdowns_by_town_or_city_response][:return][breakdown][:r4_last_update]
 			puts "***************************************"
-	end
+		end
 	else
 		puts "***************************************"
 		puts "Pueblo: " + breakdowns[:get_breakdowns_by_town_or_city_response][:return][:r1_town_or_city]

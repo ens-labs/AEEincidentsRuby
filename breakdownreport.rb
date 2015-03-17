@@ -22,7 +22,8 @@ breakdownstuff = aee_client.call(:get_breakdowns_by_town_or_city, message: { "to
 
 hash_table = breakdownstuff.body
 hash_table.each do |key, value|
-	# Checks if its an array of hashes or a single hash
+	# Checks if it is an array of hashes containing all the averias specified to that town
+	# or a single hash with the specific breakdown for that pueblo
 	if value[:return].kind_of?(Array)
 		for averias in 0...value[:return].length
 			puts "***************************************"

@@ -9,8 +9,9 @@ for town in towns
 	breakdowns_call = aee_client.call(:get_breakdowns_by_town_or_city, message: { "townOrCity" => town[:r1_town_or_city] })
 	breakdowns = breakdowns_call.body
 
-	if breakdowns[:get_breakdowns_by_town_or_city_response][:return].kind_of?(Array)
-		for breakdown in 0...breakdowns[:get_breakdowns_by_town_or_city_response][:return].length
+	case breakdowns[:get_breakdowns_by_town_or_city_response][:return].kind_of?(Array)
+	 when true
+	 	for breakdown in 0...breakdowns[:get_breakdowns_by_town_or_city_response][:return].length
 			puts "***************************************"
 			puts "Pueblo: " + breakdowns[:get_breakdowns_by_town_or_city_response][:return][breakdown][:r1_town_or_city]
 			puts "Area: " + breakdowns[:get_breakdowns_by_town_or_city_response][:return][breakdown][:r2_area]
@@ -18,12 +19,12 @@ for town in towns
 			puts "Last Update: " + breakdowns[:get_breakdowns_by_town_or_city_response][:return][breakdown][:r4_last_update]
 			puts "***************************************"
 		end
-	else
-		puts "***************************************"
+	 else
+	 	puts "***************************************"
 		puts "Pueblo: " + breakdowns[:get_breakdowns_by_town_or_city_response][:return][:r1_town_or_city]
 		puts "Area: " + breakdowns[:get_breakdowns_by_town_or_city_response][:return][:r2_area]
 		puts "Status: " + breakdowns[:get_breakdowns_by_town_or_city_response][:return][:r3_status]
 		puts "Last Update: " + breakdowns[:get_breakdowns_by_town_or_city_response][:return][:r4_last_update]
 		puts "***************************************"
-	end
+	end 
 end

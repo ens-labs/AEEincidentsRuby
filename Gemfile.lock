@@ -68,3 +68,6 @@ DEPENDENCIES
   oauth
   savon (~> 2.0)
   twitter
+
+BUNDLED WITH
+   1.10.4

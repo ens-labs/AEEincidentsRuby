@@ -25,12 +25,12 @@ hash_breakdonws_per_town.each do |key, value|
 	# Checks if it is an array of hashes containing all the averias specified to that town
 	# or a single hash with the specific breakdown for that pueblo
 	if value[:return].kind_of?(Array)
-		for averias in 0...value[:return].length
+		for breakdowns in 0...value[:return].length
 			puts "***************************************"
-			puts "Town: " + value[:return][averias][:r1_town_or_city]
-			puts "Area: " + value[:return][averias][:r2_area]
-			puts "Status: " + value[:return][averias][:r3_status]
-			puts "Last Update: " + value[:return][averias][:r4_last_update]
+			puts "Town: " + value[:return][breakdowns][:r1_town_or_city]
+			puts "Area: " + value[:return][breakdowns][:r2_area]
+			puts "Status: " + value[:return][breakdowns][:r3_status]
+			puts "Last Update: " + value[:return][breakdowns][:r4_last_update]
 			puts "***************************************"
 		end
 	else

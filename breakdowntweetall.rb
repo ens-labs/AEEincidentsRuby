@@ -13,26 +13,27 @@ client = Twitter::REST::Client.new do |config|
 end
 
 aee_url = 'http://wss.prepa.com/services/BreakdownReport?wsdl'
-pueblos = Array.new
+towns = Array.new
 
 aee_client = Savon.client(wsdl: aee_url)
-breakdownSummary = aee_client.call(:get_breakdowns_summary)
-hashtable = breakdownSummary.body
+breakdowns_data = aee_client.call(:get_breakdowns_summary)
+breakdowns_summary = breakdowns_data.body
 
-hashtable.each do |key, value|
-	for cada_pueblo in 0...value[:return].length
-		pueblos.push value[:return][cada_pueblo][:r1_town_or_city]
+breakdowns_summary.each do |key, value|
+	amount_of_towns = value[:return].length
+	for cada_pueblo in 0...amount_of_towns
+		towns.push value[:return][cada_pueblo][:r1_town_or_city]
 	end
 end
 
-pueblos.each do |pueblo|
-	breakdownstuff = aee_client.call(:get_breakdowns_by_town_or_city, message: { "townOrCity" => pueblo })
-	data = breakdownstuff.body
-	if data[:get_breakdowns_by_town_or_city_response][:return].kind_of?(Array)
-		for averias in 0...data[:get_breakdowns_by_town_or_city_response][:return].length
-			client.update("OOPS! @AEEONLINE tienes una averia en: " + data[:get_breakdowns_by_town_or_city_response][:return][averias][:r1_town_or_city] + " " + data[:get_breakdowns_by_town_or_city_response][:return][averias][:r2_area])
+towns.each do |value|
+	breakdowns_per_town = aee_client.call(:get_breakdowns_by_town_or_city, message: { "townOrCity" => value })
+	total_breakdowns = breakdowns_per_town.body
+	if total_breakdowns[:get_breakdowns_by_town_or_city_response][:return].kind_of?(Array)
+		for breakdowns in 0...total_breakdowns[:get_breakdowns_by_town_or_city_response][:return].length
+			client.update("OOPS! @AEEONLINE tienes una averia en: " + total_breakdowns[:get_breakdowns_by_town_or_city_response][:return][breakdowns][:r1_town_or_city] + " " + total_breakdowns[:get_breakdowns_by_town_or_city_response][:return][breakdowns][:r2_area])
 		end
 	else
-		client.update("OOPS! @AEEONLINE tienes una averia en: " + data[:get_breakdowns_by_town_or_city_response][:return][:r1_town_or_city] + " " + data[:get_breakdowns_by_town_or_city_response][:return][:r2_area])
+		client.update("OOPS! @AEEONLINE tienes una averia en: " + total_breakdowns[:get_breakdowns_by_town_or_city_response][:return][:r1_town_or_city] + " " + total_breakdowns[:get_breakdowns_by_town_or_city_response][:return][:r2_area])
 	end
 end

@@ -8,13 +8,14 @@ breakdowns_data = aee_client.call(:get_breakdowns_summary)
 breakdowns_summary = breakdowns_data.body
 
 breakdowns_summary.each do |key, value|
-	puts "Available Towns: "
-	amount_of_towns = value[:return].length
-	for town in 0...amount_of_towns
-		puts value[:return][town][:r1_town_or_city] + " " + value[:return][town][:r2_total_breakdowns]
+	(0).upto(value[:return].size - 1) do |cada_pueblo|
+		puts "------------------------"
+		puts "Town: " + value[:return][cada_pueblo][:r1_town_or_city]
+		puts "Quantity of breakdowns: " + value[:return][cada_pueblo][:r2_total_breakdowns]
 	end
 end
 
+puts "------------------------"
 print "Town: "
 input_town = STDIN.gets.chomp()
 
